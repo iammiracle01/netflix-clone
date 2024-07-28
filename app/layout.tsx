@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "StreamFlix",
-  description: "StreamFlix is your ultimate destination for endless entertainment! Experience the thrill of a massive collection of movies, TV shows, documentaries, and original series, all in one place. With",
+  description: "StreamFlix is your ultimate destination for endless entertainment! Experience the thrill of a massive collection of movies, TV shows, documentaries, and original series, all in one place.",
 };
 
 export default function RootLayout({
