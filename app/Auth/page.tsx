@@ -1,14 +1,18 @@
 "use client";
 import Image from "next/image";
-import Input from "../components/input";
+import Input from "../../components/input";
 import { useCallback, useState } from "react";
+import axios from 'axios'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation';
 
 const Auth = () => {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [variant, setVariant] = useState("Login");
+  const [variant, setVariant] = useState("login");
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
@@ -16,9 +20,41 @@ const Auth = () => {
     );
   }, []);
 
+  const login = useCallback(async () => {
+    try {
+      await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: '/'
+      });
+      router.push('/')
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  }, [email, password, router]);
+
+  const register = useCallback(async () => {
+    try {
+      await axios.post('/api/register', {
+        email,
+        name,
+        password
+      })
+     login()
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  }, [email, name, password, login]);
+
+
   return (
     <div className="relative min-h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
-      <div className="bg-black md: bg-opacity-75 lg:bg-opacity-65 min-h-screen w-full flex flex-col justify-center items-center">
+      <div className="bg-black md:bg-opacity-65 lg:bg-opacity-50 min-h-screen w-full flex flex-col justify-center items-center">
         <nav className="px-4 lg:px-12 w-full flex justify-center lg:justify-start">
           <div className="relative h-32 w-32">
             <Image src="/images/logo.png" fill alt="Logo" />
@@ -35,7 +71,7 @@ const Auth = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setName(e.target.value)
                 }
-                id="username"
+                id="name"
                 value={name}
               />
             )}
@@ -58,7 +94,7 @@ const Auth = () => {
               value={password}
             />
           </div>
-          <button className="bg-red-600 py-3 text-white rounded-md w-full mt-6 lg:mt-10 hover:bg-red-700 transition">
+          <button onClick={variant === 'login'? login : register } className="bg-red-600 py-3 text-white rounded-md w-full mt-6 lg:mt-10 hover:bg-red-700 transition">
             {variant === 'login' ? 'Login' : 'Sign up'}
           </button>
           <p className="text-neutral-500 mt-6 lg:mt-12 text-center">
