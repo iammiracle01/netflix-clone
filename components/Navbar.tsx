@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import AccountMenu from "./AccountMenu";
 
 const TOP_OFFSET = 66;
+
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -31,17 +32,20 @@ const Navbar = () => {
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current);
   }, []);
+
   const toggleAccountMenu = useCallback(() => {
     setShowAccountMenu((current) => !current);
   }, []);
+
   return (
     <nav className="w-full fixed z-40">
       <div
         className={`px-4 py-4 md:px-16 flex items-center transition duration-500 ${
-          showBackground ? "bg-zinc-900 bg-opacity-90" : ""
-        }`}>
+          showBackground ? "bg-zinc-900 bg-opacity-90 shadow-lg" : ""
+        }`}
+      >
         <div className="relative h-8 w-28">
-          <Image src="/images/logo.png" fill alt="Logo" />
+          <Image src="/images/logo.png" fill alt="Logo" className="object-contain" />
         </div>
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label="Home" />
@@ -53,10 +57,11 @@ const Navbar = () => {
         </div>
         <div
           onClick={toggleMobileMenu}
-          className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative">
+          className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
+        >
           <p className="text-white text-sm">Browse</p>
           <BsChevronDown
-            className={`text-white transition ${
+            className={`text-white transition-transform ${
               showMobileMenu ? "rotate-180" : "rotate-0"
             }`}
           />
@@ -69,15 +74,15 @@ const Navbar = () => {
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BsBell />
           </div>
-
           <div
             onClick={toggleAccountMenu}
-            className="flex flex-row items-center cursor-pointer gap-2 relative">
+            className="flex flex-row items-center cursor-pointer gap-2 relative"
+          >
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden relative">
-              <Image src="/images/profile.png" alt="Profile" fill />
+              <Image src="/images/profile.png" alt="Profile" fill className="object-cover" />
             </div>
             <BsChevronDown
-              className={`text-white transition ${
+              className={`text-white transition-transform ${
                 showAccountMenu ? "rotate-180" : "rotate-0"
               }`}
             />
