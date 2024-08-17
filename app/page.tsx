@@ -1,20 +1,20 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from '@/lib/auth';
 import { redirect } from "next/navigation";
-import LogoutButton from "@/components/LogoutButton";
+import Navbar from "@/components/Navbar";
+import Billboard from "@/components/Billboard";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     redirect("/auth");
-
   }
 
   return (
     <>
-      <h1 className="text-2xl text-green-500">StreamFlix</h1>
-      <LogoutButton />
+      <Navbar />
+      <Billboard />
     </>
   );
 }

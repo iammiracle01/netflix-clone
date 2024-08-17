@@ -56,14 +56,14 @@ const Auth = () => {
 
   return (
     <div className="relative min-h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
-      <div className="bg-black md:bg-opacity-65 lg:bg-opacity-50 min-h-screen w-full flex flex-col justify-center items-center">
-        <nav className="px-4 lg:px-12 w-full flex justify-center lg:justify-start">
-          <div className="relative h-32 w-32">
-            <Image src="/images/logo.png" fill alt="Logo" />
-          </div>
+      <div className="bg-black md:bg-opacity-65 min-h-screen w-full flex flex-col justify-center items-center">
+        <nav className="px-12 py-5 w-full">
+        <div className="relative h-8 w-28">
+          <Image src="/images/logo.png" fill alt="Logo" />
+        </div>
         </nav>
-        <div className="bg-black bg-opacity-70 p-10 lg:p-16 self-center m-2 rounded-lg w-full max-w-md">
-          <h2 className="text-white text-3xl lg:text-4xl mb-8 font-semibold">
+        <div className="bg-black bg-opacity-70 p-12 self-center rounded-lg w-full max-w-md">
+          <h2 className="text-white text-4xl mb-8 font-semibold">
             {variant === "login" ? "Sign in" : "Register"}
           </h2>
           <div className="flex flex-col gap-4">
@@ -96,7 +96,7 @@ const Auth = () => {
               value={password}
             />
           </div>
-          <button onClick={variant === 'login'? login : register } className="bg-red-600 py-3 text-white rounded-md w-full mt-6 lg:mt-10 hover:bg-red-700 transition">
+          <button onClick={variant === 'login'? login : register } className="bg-red-600 py-2 text-white rounded-md w-full mt-4 lg:mt-8 hover:bg-red-700 transition">
             {variant === 'login' ? 'Login' : 'Sign up'}
           </button>
           <div className='flex flex-row items-center gap-4 mt-8 justify-center'>
@@ -109,7 +109,7 @@ const Auth = () => {
 
 
           </div>
-          <p className="text-neutral-500 mt-6 lg:mt-12 text-center">
+          <p className="text-neutral-500 mt-4 lg:mt-8 text-center">
             {
               variant === "login"
                 ? "Don't have an account?"
